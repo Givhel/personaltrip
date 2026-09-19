@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sitamarhi to the Himalaya · 12-Day Journey</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EAF0F6; --surface:#FFFFFF; --ink:#14203B; --muted:#55627C; --line:#C7D3E2;
+  --sun:#D9820B; --road:#68768D; --heritage:#C4553D; --braj:#B88A00; --peaks:#4756C7; --ganga:#157F7F;
+  --sky1:#F6D9A8; --sky2:#EAF0F6;
+  --display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0D1630; --surface:#16213F; --ink:#E8EEF8; --muted:#9BA9C5; --line:#2A3760;
+    --sun:#F5B544; --road:#8E9BB4; --heritage:#EE8068; --braj:#EBC03A; --peaks:#909EFF; --ganga:#3CC0BE;
+    --sky1:#3B2E4F; --sky2:#0D1630;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0D1630; --surface:#16213F; --ink:#E8EEF8; --muted:#9BA9C5; --line:#2A3760;
+  --sun:#F5B544; --road:#8E9BB4; --heritage:#EE8068; --braj:#EBC03A; --peaks:#909EFF; --ganga:#3CC0BE;
+  --sky1:#3B2E4F; --sky2:#0D1630;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--sun);outline-offset:3px;border-radius:6px}
+
+/* ---------- hero ---------- */
+.hero{background:linear-gradient(180deg,var(--sky1) 0%,var(--sky2) 100%);padding:64px 24px 12px}
+.wrap{max-width:1040px;margin:0 auto}
+.hero h1{font-family:var(--display);font-weight:800;font-size:clamp(2.4rem,7vw,5rem);line-height:.98;letter-spacing:-.03em;max-width:12ch}
+.hero .sub{margin-top:18px;font-size:1.1rem;color:var(--muted);max-width:56ch}
+.stats{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 18px}
+.stat b{display:block;font-family:var(--display);font-size:1.6rem;line-height:1.1}
+.stat span{font-size:.85rem;color:var(--muted)}
+
+/* ---------- altitude profile ---------- */
+.profile{margin-top:36px}
+.profile h2,.section-title{font-family:var(--display);font-size:1.25rem;font-weight:600}
+.profile p{color:var(--muted);font-size:.9rem;margin:2px 0 10px}
+.scroll{overflow-x:auto;padding-bottom:6px}
+.scroll svg{display:block;min-width:760px;width:100%;height:auto}
+.ridge{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+@media (prefers-reduced-motion:no-preference){
+  .ridge{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 2.2s ease-out .2s forwards}
+  @keyframes draw{to{stroke-dashoffset:0}}
+}
+.svg-text{font-family:var(--body);fill:var(--muted);font-size:12px}
+.svg-peak{font-family:var(--display);fill:var(--ink);font-size:13px;font-weight:600}
+.pin text{font-family:var(--display);font-weight:800;font-size:12px;fill:#fff;text-anchor:middle}
+.pin:hover circle{stroke:var(--ink);stroke-width:2}
+
+/* ---------- route chain ---------- */
+.chain{display:flex;flex-wrap:wrap;gap:6px 0;margin-top:26px;list-style:none}
+.chain li{display:flex;align-items:center;font-weight:600;font-size:.92rem}
+.chain li span{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:5px 12px}
+.chain li+li::before{content:"";width:18px;height:2px;background:var(--line);margin:0 2px}
+
+/* ---------- legend ---------- */
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;margin:34px 0 8px;font-size:.88rem;color:var(--muted)}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:7px;vertical-align:-1px}
+
+/* ---------- timeline ---------- */
+.timeline{list-style:none;position:relative;padding:8px 0 20px}
+.day{display:grid;grid-template-columns:64px 1fr;gap:0 18px;position:relative;padding-bottom:28px;scroll-margin-top:16px}
+.day::before{content:"";position:absolute;left:31px;top:64px;bottom:-4px;width:2px;background:repeating-linear-gradient(to bottom,var(--line) 0 8px,transparent 8px 15px)}
+.day:last-child::before{display:none}
+.badge{width:64px;height:64px;border-radius:50%;background:var(--c);color:#fff;display:grid;place-items:center;text-align:center;font-family:var(--display);line-height:1;box-shadow:0 0 0 6px var(--bg);position:relative;z-index:1}
+.badge small{display:block;font-size:.6rem;font-weight:600;opacity:.9;margin-bottom:2px}
+.badge b{font-size:1.6rem;font-weight:800}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.card-head{background:color-mix(in srgb,var(--c) 14%,var(--surface));padding:16px 20px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 16px;align-items:flex-start}
+.date{font-family:var(--display);font-weight:800;font-size:1.05rem;color:var(--c)}
+.card-head h3{font-family:var(--display);font-weight:600;font-size:1.35rem;line-height:1.2;margin-top:2px}
+.modes{display:flex;flex-wrap:wrap;gap:6px}
+.mode{font-size:.8rem;font-weight:600;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:3px 10px;white-space:nowrap}
+.card-body{padding:18px 20px 20px;display:grid;gap:18px}
+.label{font-size:.82rem;font-weight:600;color:var(--muted);margin-bottom:8px}
+.flow{list-style:none;display:grid;gap:10px}
+.flow li{display:grid;grid-template-columns:92px 1fr;gap:12px;align-items:baseline}
+.flow .when{font-size:.8rem;font-weight:600;color:var(--c);position:relative;padding-left:14px}
+.flow .when::before{content:"";position:absolute;left:0;top:.42em;width:7px;height:7px;border-radius:50%;background:var(--c)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1.5px solid color-mix(in srgb,var(--c) 55%,var(--line));background:color-mix(in srgb,var(--c) 8%,var(--surface));border-radius:10px;padding:5px 11px;font-size:.9rem;font-weight:500}
+.chip.skip{border-style:dashed;border-color:var(--line);background:transparent;color:var(--muted);text-decoration:line-through}
+.chip.alt{border-radius:999px}
+.night{display:flex;align-items:center;gap:10px;font-size:.92rem;padding-top:14px;border-top:1px dashed var(--line)}
+.night b{font-family:var(--display)}
+.finish{display:grid;place-items:center;text-align:center;padding:36px 20px 70px;color:var(--muted)}
+.finish h2{font-family:var(--display);color:var(--ink);font-size:clamp(1.5rem,4vw,2.3rem);margin-bottom:6px}
+
+@media (max-width:640px){
+  .hero{padding-top:44px}
+  .day{grid-template-columns:44px 1fr;gap:0 12px}
+  .badge{width:44px;height:44px;box-shadow:0 0 0 4px var(--bg)}
+  .badge small{display:none}.badge b{font-size:1.15rem}
+  .day::before{left:21px;top:46px}
+  .flow li{grid-template-columns:1fr;gap:2px}
+  .card-head,.card-body{padding-left:16px;padding-right:16px}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Sitamarhi to the Himalaya</h1>
+    <p class="sub">Twelve days from 27 September to 8 October: Delhi and Agra, the temples of Braj, the Ganga at Haridwar, then Kedarnath, Badrinath and Mana Village.</p>
+    <div class="stats">
+      <div class="stat"><b>12</b><span>days, 27 Sep – 8 Oct</span></div>
+      <div class="stat"><b>9</b><span>destinations</span></div>
+      <div class="stat"><b>3,583 m</b><span>highest overnight, Kedarnath (approx.)</span></div>
+    </div>
+
+    <div class="profile">
+      <h2>Where you sleep, and how high</h2>
+      <p>Overnight altitude for each day, in metres (approximate). Tap a number to jump to that day.</p>
+      <div class="scroll"><svg id="chart" viewBox="0 0 1000 290" role="img" aria-label="Overnight altitude profile across the 12 days"></svg></div>
+    </div>
+
+    <ol class="chain" id="chain" aria-label="Route"></ol>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="legend" id="legend"></div>
+  <ol class="timeline" id="timeline"></ol>
+  <div class="finish">
+    <h2>Back home on 8 October</h2>
+    <p>Delhi, Agra, Vrindavan, Mathura, Haridwar, Kedarnath, Badrinath, Mana Village and Rishikesh, all covered.</p>
+  </div>
+</main>
+
+<script>
+const PH = {
+  road:{n:"Rail and road",c:"var(--road)"},
+  heritage:{n:"Delhi and Agra",c:"var(--heritage)"},
+  braj:{n:"Braj and the road to Haridwar",c:"var(--braj)"},
+  peaks:{n:"Kedarnath and Badrinath",c:"var(--peaks)"},
+  ganga:{n:"Ganga town",c:"var(--ganga)"}
+};
+
+const DAYS = [
+ {n:1,date:"27 Sep",wd:"Sun",ph:"road",title:"Sitamarhi to Delhi",modes:["🚆 Train"],
+  flow:[["2:40 AM","Leave Sitamarhi by train towards Delhi"],["All day","The whole day is spent travelling"],["Night","Sleep on the train"]],
+  stops:[],skip:[],night:"On the train",alt:100,short:"Train"},
+ {n:2,date:"28 Sep",wd:"Mon",ph:"heritage",title:"Delhi, day one: tombs, gardens and the ceremonial avenue",modes:["🚆 Arrive by train","🚕 Local sightseeing"],
+  flow:[["~3:15 AM","Arrive at Anand Vihar, Delhi and go directly to the hotel"],["Early","Freshen up and rest for a few hours"],["Morning","Breakfast, then start Delhi sightseeing"],["Evening","Dinner in Delhi"]],
+  stops:["Humayun's Tomb","Lodhi Garden","Qutub Minar","Mehrauli Archaeological Park","India Gate","Kartavya Path","National War Memorial","Connaught Place"],skip:[],night:"Delhi",alt:216,short:"Delhi"},
+ {n:3,date:"29 Sep",wd:"Tue",ph:"heritage",title:"Delhi, day two: Old Delhi, faith and the evening water show",modes:["🚕 Local sightseeing"],
+  flow:[["Morning","Begin with Jama Masjid, Red Fort and Chandni Chowk"],["Day","Gurudwara Sis Ganj Sahib, Raj Ghat, Lotus Temple, ISKCON Temple"],["Evening","Akshardham Temple, including the water show if it is operating"],["Night","Dinner and overnight stay in Delhi"]],
+  stops:["Jama Masjid","Red Fort","Chandni Chowk","Gurudwara Sis Ganj Sahib","Raj Ghat","Lotus Temple","ISKCON Temple","Akshardham Temple (evening water show, if operating)"],skip:[],night:"Delhi",alt:216,short:"Delhi"},
+ {n:4,date:"30 Sep",wd:"Wed",ph:"heritage",title:"Delhi to Agra to Vrindavan",modes:["🚆 Morning train","🚕 Cab / Tempo Traveller"],
+  flow:[["Early","Check out and take the morning train from Delhi to Agra"],["Midday","Taj Mahal, then lunch"],["Afternoon","Agra Fort"],["Late afternoon","Travel by cab or Tempo Traveller from Agra to Vrindavan and check in"],["Evening","Prem Mandir, then dinner"]],
+  stops:["Taj Mahal","Agra Fort","Prem Mandir"],skip:["Itimad-ud-Daulah","Mehtab Bagh"],night:"Vrindavan",alt:170,short:"Vrindavan"},
+ {n:5,date:"1 Oct",wd:"Thu",ph:"braj",title:"Vrindavan and Mathura, then on to Haridwar",modes:["🚕 Local","🚆 / 🚌 Cheapest convenient option to Haridwar"],
+  flow:[["Morning","Explore Vrindavan, then lunch"],["Afternoon","Travel to Mathura and visit its three sacred sites"],["Evening","Mathura to Haridwar by the cheapest convenient train or bus, then check in"],["If time permits","Har Ki Pauri and the evening Ganga Aarti"],["Night","Dinner and overnight stay in Haridwar"]],
+  stops:["Banke Bihari Temple","ISKCON Temple, Vrindavan","Nidhivan","Old Vrindavan area","Shri Krishna Janmabhoomi","Dwarkadhish Temple","Vishram Ghat","Har Ki Pauri (if time permits)"],skip:[],night:"Haridwar",alt:314,short:"Haridwar"},
+ {n:6,date:"2 Oct",wd:"Fri",ph:"peaks",title:"Haridwar into the mountains: the road of the five prayags",modes:["🚐 Private Tempo Traveller / large vehicle"],
+  flow:[["Early","Early breakfast, then leave Haridwar"],["Along the way","Rishikesh, Devprayag, Srinagar, Rudraprayag, with lunch and short scenic breaks"],["Evening","Reach Guptkashi / Sitapur"],["Night","Dinner and overnight stay"]],
+  stops:["Rishikesh","Devprayag","Srinagar","Rudraprayag","Guptkashi / Sitapur"],skip:[],night:"Guptkashi / Sitapur",alt:1319,short:"Guptkashi"},
+ {n:7,date:"3 Oct",wd:"Sat",ph:"peaks",title:"Kedarnath: darshan at the top",modes:["🚐 Vehicle to Gaurikund","🐎 Horse / pony (recommended)","🥾 Trek","🪑 Palki"],
+  flow:[["Early","Leave Guptkashi / Sitapur for Sonprayag, then Gaurikund"],["Choose","From Gaurikund: trek, horse/pony or palki, depending on everyone's comfort. Horse/pony is recommended for those who do not want to trek the whole route"],["Arrival","Kedarnath Temple darshan and time to explore the surroundings"],["If energy permits","Bhairavnath Temple"],["Night","Overnight stay in Kedarnath"]],
+  stops:["Sonprayag","Gaurikund","Kedarnath Temple","Bhairavnath Temple (if time and energy permit)"],skip:[],night:"Kedarnath",alt:3583,short:"Kedarnath"},
+ {n:8,date:"4 Oct",wd:"Sun",ph:"peaks",title:"Down from Kedarnath",modes:["🐎 Horse / pony or 🥾 trek","🚐 Vehicle"],
+  flow:[["Morning","Morning darshan and breakfast in Kedarnath"],["Descent","Return to Gaurikund by horse/pony or trek"],["Afternoon","By vehicle through Sonprayag back to Guptkashi / Sitapur"],["Evening","Rest, dinner and overnight stay"]],
+  stops:["Kedarnath","Gaurikund","Sonprayag","Guptkashi / Sitapur"],skip:[],night:"Guptkashi / Sitapur",alt:1319,short:"Guptkashi"},
+ {n:9,date:"5 Oct",wd:"Mon",ph:"peaks",title:"Guptkashi to Badrinath",modes:["🚐 Tempo Traveller"],
+  flow:[["Early","Early breakfast, then leave Guptkashi / Sitapur"],["Along the way","Rudraprayag, Karnaprayag, Chamoli, Joshimath, with lunch and scenic stops"],["Afternoon / evening","Reach Badrinath and check in"],["If timing permits","Tapt Kund and Badrinath Temple darshan or aarti"],["Night","Dinner and overnight stay in Badrinath"]],
+  stops:["Rudraprayag","Karnaprayag","Chamoli","Joshimath","Tapt Kund","Badrinath Temple"],skip:[],night:"Badrinath",alt:3133,short:"Badrinath"},
+ {n:10,date:"6 Oct",wd:"Tue",ph:"peaks",title:"Badrinath and Mana, India's last village",modes:["🚶 Local"],
+  flow:[["Morning","Badrinath Temple darshan and breakfast"],["Late morning","Mana Village, India's last village"],["Midday","Return to Badrinath for lunch"],["Afternoon","Explore the town or relax"],["Night","Dinner and a second overnight stay in Badrinath"]],
+  stops:["Badrinath Temple","Mana Village","Vyas Gufa","Ganesh Gufa","Bheem Pul","Saraswati River viewpoint"],skip:[],night:"Badrinath (second night)",alt:3133,short:"Badrinath"},
+ {n:11,date:"7 Oct",wd:"Wed",ph:"ganga",title:"Badrinath to Rishikesh",modes:["🚐 Tempo Traveller"],
+  flow:[["Early","Early breakfast, then leave Badrinath"],["Along the way","Joshimath, Karnaprayag, Rudraprayag, Srinagar"],["Evening","Reach Rishikesh and check in"],["Evening","Ganga Aarti at Triveni Ghat, then a walk and market visit"],["Night","Dinner and overnight stay in Rishikesh"]],
+  stops:["Joshimath","Karnaprayag","Rudraprayag","Srinagar","Triveni Ghat (Ganga Aarti)","Rishikesh market"],skip:[],night:"Rishikesh",alt:372,short:"Rishikesh"},
+ {n:12,date:"8 Oct",wd:"Thu",ph:"road",title:"Rishikesh to Delhi, then home to Sitamarhi",modes:["🚆 / 🚌 Cheapest convenient option to Delhi","🚆 Train to Sitamarhi"],
+  flow:[["Early","Check out early from Rishikesh"],["Morning","Travel to Delhi by the cheapest convenient train or bus"],["Midday","Lunch in Delhi"],["Afternoon","Go to the railway station and board the train towards Sitamarhi"],["Finish","The journey ends"]],
+  stops:[],skip:[],night:"On the train home",alt:100,short:"Train"}
+];
+
+const $ = s => document.querySelector(s);
+
+/* legend */
+$("#legend").innerHTML = Object.values(PH).map(p=>`<span><i style="background:${p.c}"></i>${p.n}</span>`).join("");
+
+/* route chain */
+const route = ["Sitamarhi","Delhi","Agra","Vrindavan","Mathura","Haridwar","Guptkashi","Kedarnath","Guptkashi","Badrinath · Mana","Rishikesh","Delhi","Sitamarhi"];
+$("#chain").innerHTML = route.map(r=>`<li><span>${r}</span></li>`).join("");
+
+/* timeline */
+$("#timeline").innerHTML = DAYS.map(d=>{
+  const p = PH[d.ph];
+  const stops = d.stops.map(s=>`<span class="chip">${s}</span>`).join("");
+  const skip = d.skip.map(s=>`<span class="chip skip">${s}</span>`).join("");
+  return `<li class="day" id="day-${d.n}" style="--c:${p.c}">
+    <div class="badge"><div><small>Day</small><b>${d.n}</b></div></div>
+    <article class="card">
+      <div class="card-head">
+        <div><div class="date">${d.wd}, ${d.date}</div><h3>${d.title}</h3></div>
+        <div class="modes">${d.modes.map(m=>`<span class="mode">${m}</span>`).join("")}</div>
+      </div>
+      <div class="card-body">
+        <div><div class="label">How the day runs</div>
+          <ul class="flow">${d.flow.map(f=>`<li><span class="when">${f[0]}</span><span>${f[1]}</span></li>`).join("")}</ul></div>
+        ${d.stops.length?`<div><div class="label">Places</div><div class="chips">${stops}</div></div>`:""}
+        ${d.skip.length?`<div><div class="label">Skipped on purpose</div><div class="chips">${skip}</div></div>`:""}
+        <div class="night">🌙 <span>Overnight: <b>${d.night}</b></span></div>
+      </div>
+    </article>
+  </li>`;
+}).join("");
+
+/* altitude chart */
+(function(){
+  const W=1000,H=290,L=50,R=50,top=40,base=232;
+  const maxA=3800, n=DAYS.length;
+  const X=i=>L+i*((W-L-R)/(n-1)), Y=a=>base-(a/maxA)*(base-top);
+  const pts=DAYS.map((d,i)=>[X(i),Y(d.alt)]);
+  // Catmull-Rom to Bezier
+  let path=`M${pts[0][0]},${pts[0][1]}`;
+  for(let i=0;i<pts.length-1;i++){
+    const p0=pts[i-1]||pts[i],p1=pts[i],p2=pts[i+1],p3=pts[i+2]||p2,t=0.18;
+    path+=` C${p1[0]+(p2[0]-p0[0])*t},${p1[1]+(p2[1]-p0[1])*t} ${p2[0]-(p3[0]-p1[0])*t},${p2[1]-(p3[1]-p1[1])*t} ${p2[0]},${p2[1]}`;
+  }
+  const area=path+` L${pts[n-1][0]},${base} L${pts[0][0]},${base} Z`;
+  const grid=[0,1000,2000,3000].map(a=>`<line x1="${L-20}" x2="${W-R+20}" y1="${Y(a)}" y2="${Y(a)}" stroke="var(--line)" stroke-dasharray="3 6"/><text class="svg-text" x="${L-24}" y="${Y(a)+4}" text-anchor="end">${a?a.toLocaleString("en-IN")+" m":"0"}</text>`).join("");
+  const labelled={6:"Kedarnath 3,583 m",8:"Badrinath 3,133 m",5:"Guptkashi 1,319 m"};
+  const pins=DAYS.map((d,i)=>{
+    const [x,y]=pts[i], c=PH[d.ph].c;
+    const lab = labelled[i]&&(i!==8)?`<text class="svg-peak" x="${x}" y="${y-20}" text-anchor="middle">${labelled[i]}</text>`:"";
+    const lab2 = i===8?`<text class="svg-peak" x="${(x+pts[9][0])/2}" y="${y-20}" text-anchor="middle">${labelled[8]}</text>`:"";
+    return `${lab}${lab2}<a href="#day-${d.n}" class="pin" aria-label="Day ${d.n}: ${d.short}"><circle cx="${x}" cy="${y}" r="13" fill="${c}"/><text x="${x}" y="${y+4.5}">${d.n}</text></a>
+      <text class="svg-text" x="${x}" y="${base+26}" text-anchor="middle">${d.short}</text>
+      <text class="svg-text" x="${x}" y="${base+42}" text-anchor="middle" style="font-size:11px;opacity:.8">${d.date}</text>`;
+  }).join("");
+  $("#chart").innerHTML=`
+    <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" style="stop-color:var(--peaks);stop-opacity:.38"/>
+      <stop offset="1" style="stop-color:var(--peaks);stop-opacity:.03"/></linearGradient></defs>
+    ${grid}
+    <path d="${area}" fill="url(#g)"/>
+    <path class="ridge" pathLength="1" d="${path}"/>
+    ${pins}`;
+})();
+</script>
+</body>
+</html>
